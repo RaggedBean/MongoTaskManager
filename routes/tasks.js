@@ -2,47 +2,25 @@ const express = require("express");
 const Task = require("../models/Task");
 const router = express.Router();
 
-// ➤ Récupérer toutes les tâches (avec filtres et tris)
+// 🔹 Récupérer toutes les tâches avec filtres et tri
 router.get("/", async (req, res) => {
   try {
-    const {
-      statut,
-      priorite,
-      categorie,
-      etiquette,
-      avant,
-      apres,
-      q,
-      tri,
-      ordre,
-    } = req.query;
-    let filter = {};
+    const { tri, ordre } = req.query;
 
-    if (statut) filter.statut = statut;
-    if (priorite) filter.priorite = priorite;
-    if (categorie) filter.categorie = categorie;
-    if (etiquette) filter.etiquettes = etiquette;
-    if (avant) filter.echeance = { $lt: new Date(avant) };
-    if (apres) filter.echeance = { $gt: new Date(apres) };
-    if (q)
-      filter.$or = [
-        { titre: new RegExp(q, "i") },
-        { description: new RegExp(q, "i") },
-      ];
+    let sortOption = {}; // Par défaut, pas de tri
+    if (tri) {
+      const sortOrder = ordre === "desc" ? -1 : 1;
+      sortOption[tri] = sortOrder;
+    }
 
-    let sort = {};
-    if (tri) sort[tri] = ordre === "desc" ? -1 : 1;
-
-    const tasks = await Task.find(filter).sort(sort);
+    const tasks = await Task.find().sort(sortOption); // Appliquer le tri
     res.json(tasks);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Erreur lors de la récupération des tâches." });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur serveur", error });
   }
 });
 
-// ➤ Récupérer une tâche par ID
+// 🔹 Récupérer une tâche par son ID
 router.get("/:id", async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -55,7 +33,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ➤ Créer une nouvelle tâche
+// 🔹 Créer une nouvelle tâche
 router.post("/", async (req, res) => {
   try {
     const task = new Task(req.body);
@@ -66,7 +44,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ➤ Modifier une tâche
+// 🔹 Modifier une tâche
 router.put("/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
@@ -81,7 +59,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// ➤ Supprimer une tâche
+// 🔹 Supprimer une tâche
 router.delete("/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);

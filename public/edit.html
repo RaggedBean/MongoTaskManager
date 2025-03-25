@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestion des Tâches</title>
+    <title>Modifier Tâche</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="edit.js"></script>
   </head>
   <body>
-    <h1>Ajouter une Tâche</h1>
-    <form id="task-form">
+    <h1>Modifier la Tâche</h1>
+    <form id="edit-form">
+      <input type="hidden" id="task-id" />
+
       <label for="titre">Titre :</label>
       <input type="text" id="titre" required />
 
@@ -44,26 +47,10 @@
       <input type="email" id="auteur-email" />
 
       <label for="categorie">Catégorie :</label>
-      <input type="text" id="categorie" required />
+      <input type="text" id="categorie" />
 
-      <button type="submit">Ajouter</button>
+      <button type="submit">Enregistrer</button>
+      <a href="index.html" class="btn">Annuler</a>
     </form>
-
-    <div class="filter-container">
-      <label for="tri">Trier par :</label>
-      <select id="tri">
-        <option value="">-- Choisir --</option>
-        <option value="echeance">Date d'échéance</option>
-        <option value="priorite">Priorité</option>
-        <option value="dateCreation">Date de création</option>
-      </select>
-
-      <button id="toggle-order">⬆️</button>
-    </div>
-
-    <h2>Historique des Tâches</h2>
-    <ul id="task-list"></ul>
-
-    <script src="script.js"></script>
   </body>
 </html>
