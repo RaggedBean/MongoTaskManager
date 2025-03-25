@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des Tâches</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Ajouter une Tâche</h1>
+    <form id="task-form">
+      <label for="titre">Titre :</label>
+      <input type="text" id="titre" required />
+
+      <label for="description">Description :</label>
+      <textarea id="description"></textarea>
+
+      <label for="echeance">Échéance :</label>
+      <input type="date" id="echeance" />
+
+      <label for="statut">Statut :</label>
+      <select id="statut">
+        <option value="à faire">À faire</option>
+        <option value="en cours">En cours</option>
+        <option value="terminée">Terminée</option>
+        <option value="annulée">Annulée</option>
+      </select>
+
+      <label for="priorite">Priorité :</label>
+      <select id="priorite">
+        <option value="basse">Basse</option>
+        <option value="moyenne">Moyenne</option>
+        <option value="haute">Haute</option>
+        <option value="critique">Critique</option>
+      </select>
+
+      <label for="auteur-nom">Nom de l'auteur :</label>
+      <input type="text" id="auteur-nom" />
+
+      <label for="auteur-prenom">Prénom de l'auteur :</label>
+      <input type="text" id="auteur-prenom" />
+
+      <label for="auteur-email">Email de l'auteur :</label>
+      <input type="email" id="auteur-email" />
+
+      <label for="categorie">Catégorie :</label>
+      <input type="text" id="categorie" required />
+
+      <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Liste des Tâches</h2>
+    <ul id="task-list"></ul>
+
+    <script src="script.js"></script>
+  </body>
+</html>

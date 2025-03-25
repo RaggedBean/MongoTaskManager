@@ -1,0 +1,83 @@
+{
+  "type": "tasks",
+  "properties": {
+    "_id": { "type": "string" },
+    "titre": { "type": "string" },
+    "description": { "type": "string" },
+    "dateCreation": { "type": "string", "format": "date-time" },
+    "echeance": { "type": "string", "format": "date-time" },
+    "statut": {
+      "type": "string",
+      "enum": ["à faire", "en cours", "terminée", "annulée"]
+    },
+    "priorite": {
+      "type": "string",
+      "enum": ["basse", "moyenne", "haute", "critique"]
+    },
+    "auteur": {
+      "type": "object",
+      "properties": {
+        "nom": { "type": "string" },
+        "prenom": { "type": "string" },
+        "email": { "type": "string", "format": "email" }
+      },
+      "required": ["nom", "prenom", "email"]
+    },
+    "categorie": { "type": "string" },
+    "etiquettes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sousTaches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "titre": { "type": "string" },
+          "statut": {
+            "type": "string",
+            "enum": ["à faire", "en cours", "terminée", "annulée"]
+          },
+          "echeance": { "type": "string", "format": "date-time" }
+        },
+        "required": ["titre", "statut", "echeance"]
+      }
+    },
+    "commentaires": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "auteur": { "type": "string", "format": "email" },
+          "date": { "type": "string", "format": "date-time" },
+          "contenu": { "type": "string" }
+        },
+        "required": ["auteur", "date", "contenu"]
+      }
+    },
+    "historiqueModifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "champModifie": { "type": "string" },
+          "ancienneValeur": { "type": "string" },
+          "nouvelleValeur": { "type": "string" },
+          "date": { "type": "string", "format": "date-time" }
+        },
+        "required": ["champModifie", "ancienneValeur", "nouvelleValeur", "date"]
+      }
+    }
+  },
+  "required": [
+    "_id",
+    "titre",
+    "description",
+    "dateCreation",
+    "echeance",
+    "statut",
+    "priorite",
+    "auteur",
+    "categorie"
+  ]
+}
