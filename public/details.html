@@ -15,9 +15,21 @@
       <button id="delete-task" class="btn-delete">Supprimer</button>
     </div>
 
+    <h2>Sous-tâches</h2>
+    <ul id="subtask-list"></ul>
+    <input type="text" id="new-subtask" placeholder="Titre de la sous-tâche" />
+    <select id="subtask-status">
+      <option value="à faire">À faire</option>
+      <option value="en cours">En cours</option>
+      <option value="terminée">Terminée</option>
+    </select>
+    <input type="date" id="subtask-echeance" />
+    <button id="add-subtask">Ajouter</button>
+
     <h2>Commentaires</h2>
     <ul id="comment-list"></ul>
 
+    <input type="text" id="comment-author" placeholder="Votre nom ou email" />
     <textarea
       id="new-comment"
       placeholder="Ajouter un commentaire..."

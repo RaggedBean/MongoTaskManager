@@ -21,8 +21,17 @@ const taskSchema = new mongoose.Schema({
     email: { type: String, required: false, match: /\S+@\S+\.\S+/ },
   },
   categorie: { type: String, required: false },
-
-  // 🔹 Ajout du champ `commentaires`
+  sousTaches: [
+    {
+      titre: { type: String, required: true },
+      statut: {
+        type: String,
+        enum: ["à faire", "en cours", "terminée"],
+        default: "à faire",
+      },
+      echeance: { type: Date, required: false },
+    },
+  ],
   commentaires: [
     {
       auteur: { type: String, required: true },

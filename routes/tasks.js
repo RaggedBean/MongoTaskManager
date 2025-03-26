@@ -88,22 +88,20 @@ router.delete("/:id", async (req, res) => {
 
 // Ajouter un commentaire à une tâche
 router.post("/:id/comment", async (req, res) => {
+  const { auteur, contenu } = req.body;
+
+  if (!auteur || !contenu) {
+    return res.status(400).json({ error: "Auteur et contenu sont requis." });
+  }
+
   try {
-    const { auteur, contenu } = req.body;
-    if (!auteur || !contenu) {
-      return res.status(400).json({ error: "Auteur et contenu requis" });
-    }
-
     const task = await Task.findById(req.params.id);
-    if (!task) {
-      return res.status(404).json({ error: "Tâche non trouvée" });
-    }
+    if (!task) return res.status(404).json({ error: "Tâche non trouvée." });
 
-    // Ajouter le commentaire
     task.commentaires.push({ auteur, contenu });
     await task.save();
 
-    res.json(task.commentaires);
+    res.status(201).json(task.commentaires);
   } catch (error) {
     res.status(500).json({ error: "Erreur serveur", details: error.message });
   }
@@ -118,6 +116,45 @@ router.get("/:id/comments", async (req, res) => {
     }
 
     res.json(task.commentaires);
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur", details: error.message });
+  }
+});
+
+// ✅ Ajouter une sous-tâche
+router.post("/:id/subtask", async (req, res) => {
+  const { titre, statut, echeance } = req.body;
+
+  if (!titre) {
+    return res.status(400).json({ error: "Le titre est obligatoire." });
+  }
+
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).json({ error: "Tâche non trouvée." });
+
+    const newSubtask = { titre, statut, echeance };
+    task.sousTaches.push(newSubtask);
+    await task.save();
+
+    res.status(201).json(task.sousTaches);
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur", details: error.message });
+  }
+});
+
+// ✅ Supprimer une sous-tâche
+router.delete("/:taskId/subtask/:subtaskId", async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.taskId);
+    if (!task) return res.status(404).json({ error: "Tâche non trouvée." });
+
+    task.sousTaches = task.sousTaches.filter(
+      (subtask) => subtask._id.toString() !== req.params.subtaskId
+    );
+
+    await task.save();
+    res.json({ message: "Sous-tâche supprimée." });
   } catch (error) {
     res.status(500).json({ error: "Erreur serveur", details: error.message });
   }

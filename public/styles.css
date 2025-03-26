@@ -146,3 +146,31 @@ li button:hover {
   font-size: 0.9em; /* Réduit légèrement la taille pour différencier */
   color: #666; /* Donne une couleur plus discrète */
 }
+
+#subtask-list {
+  list-style: none;
+  padding: 0;
+}
+
+#subtask-list li {
+  background: #f9f9f9;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#subtask-list .btn-delete {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#subtask-list .btn-delete:hover {
+  background-color: #cc0000;
+}
