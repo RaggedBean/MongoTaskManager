@@ -125,3 +125,11 @@ li button:hover {
   gap: 10px;
   margin-bottom: 15px;
 }
+
+.task-info em {
+  display: block; /* Force un affichage en bloc pour être sur une nouvelle ligne */
+  text-align: left; /* Aligne le texte à gauche */
+  margin-top: 5px; /* Ajoute un petit espace entre la description et le statut */
+  font-size: 0.9em; /* Réduit légèrement la taille pour différencier */
+  color: #666; /* Donne une couleur plus discrète */
+}

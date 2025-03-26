@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("task-form");
   const taskList = document.getElementById("task-list");
 
+  // Soumission du formulaire pour ajouter une tâche
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -48,9 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Fonction pour ajouter une tâche à la liste avec une meilleure présentation
   function addTaskToList(task) {
     const li = document.createElement("li");
-    li.textContent = `${task.titre} - ${task.description} (Statut: ${task.statut})`;
+    li.classList.add("task-item");
+
+    // Conteneur du texte de la tâche
+    const taskInfo = document.createElement("div");
+    taskInfo.classList.add("task-info");
+
+    // Affichage du titre en gras
+    const title = document.createElement("strong");
+    title.textContent = task.titre;
+
+    // Détails de la tâche
+    const details = document.createElement("span");
+    details.innerHTML = ` - ${task.description} <br> <em>${task.statut}</em>`;
+
+    taskInfo.appendChild(title);
+    taskInfo.appendChild(details);
 
     // Conteneur pour les boutons
     const buttonContainer = document.createElement("div");
@@ -92,11 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonContainer.appendChild(editBtn);
     buttonContainer.appendChild(deleteBtn);
 
-    // Ajout du conteneur des boutons à la tâche
+    // Ajout des éléments dans la tâche
+    li.appendChild(taskInfo);
     li.appendChild(buttonContainer);
     taskList.appendChild(li);
   }
 
+  // Fonction pour charger les tâches avec un tri
   async function loadTasks() {
     const tri = document.getElementById("tri").value;
     const ordre =
@@ -118,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Gestion du tri
   document.getElementById("tri").addEventListener("change", loadTasks);
 
   document
@@ -128,5 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
       loadTasks();
     });
 
+  // Charger les tâches au démarrage
   loadTasks();
 });
