@@ -2,6 +2,20 @@ const express = require("express");
 const Task = require("../models/Task");
 const router = express.Router();
 
+// 🔹 Récupérer toutes les données d'une tâche
+router.get("/:id", async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).json({ error: "Tâche non trouvée." });
+
+    res.json(task);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération de la tâche." });
+  }
+});
+
 // 🔹 Récupérer toutes les tâches avec filtres et tri
 router.get("/", async (req, res) => {
   try {

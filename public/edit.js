@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const taskId = urlParams.get("id");
 
   if (taskId) {
+    document.getElementById("cancel-edit").href = `details.html?id=${taskId}`;
+
     const response = await fetch(`/tasks/${taskId}`);
     const task = await response.json();
 
@@ -48,6 +50,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify(updatedTask),
       });
 
-      window.location.href = "index.html";
+      window.location.href = `details.html?id=${taskId}`; // ⬅ Redirige vers la page de détails après édition
     });
 });

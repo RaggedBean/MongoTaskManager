@@ -73,41 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("task-buttons");
 
-    // Bouton Modifier
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Modifier";
-    editBtn.classList.add("btn-edit");
-    editBtn.addEventListener("click", () => {
-      window.location.href = `/edit.html?id=${task._id}`;
-    });
-
-    // Bouton Supprimer
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Supprimer";
-    deleteBtn.classList.add("btn-delete");
-    deleteBtn.addEventListener("click", async () => {
-      if (confirm("Voulez-vous vraiment supprimer cette tâche ?")) {
-        try {
-          const response = await fetch(`/tasks/${task._id}`, {
-            method: "DELETE",
-          });
-          if (response.ok) {
-            li.remove();
-          } else {
-            console.error(
-              "Erreur lors de la suppression :",
-              response.statusText
-            );
-          }
-        } catch (error) {
-          console.error("Erreur lors de la suppression :", error);
-        }
-      }
+    // Bouton Details
+    const detailsBtn = document.createElement("button");
+    detailsBtn.textContent = "Détails";
+    detailsBtn.classList.add("btn-details");
+    detailsBtn.addEventListener("click", () => {
+      window.location.href = `/details.html?id=${task._id}`;
     });
 
     // Ajout des boutons dans le conteneur
-    buttonContainer.appendChild(editBtn);
-    buttonContainer.appendChild(deleteBtn);
+    buttonContainer.appendChild(detailsBtn);
 
     // Ajout des éléments dans la tâche
     li.appendChild(taskInfo);

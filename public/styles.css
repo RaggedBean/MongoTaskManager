@@ -92,6 +92,19 @@ li button:hover {
   background-color: #0056b3;
 }
 
+.btn-details {
+  background-color: #007bff; /* Orange */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-details:hover {
+  background-color: #0056b3;
+}
+
 .btn-edit {
   background-color: #ff9800; /* Orange */
   color: white;
