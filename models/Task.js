@@ -21,6 +21,15 @@ const taskSchema = new mongoose.Schema({
     email: { type: String, required: false, match: /\S+@\S+\.\S+/ },
   },
   categorie: { type: String, required: false },
+
+  // 🔹 Ajout du champ `commentaires`
+  commentaires: [
+    {
+      auteur: { type: String, required: true },
+      date: { type: Date, default: Date.now },
+      contenu: { type: String, required: true },
+    },
+  ],
 });
 
 const Task = mongoose.model("Task", taskSchema);
