@@ -2,13 +2,15 @@
 
 Ce projet est une application web permettant de gérer des tâches avec des fonctionnalités telles que la création, l'affichage, la modification et la suppression des tâches. L'application utilise **Node.js**, **Express**, **MongoDB** et une interface en **HTML, CSS et JavaScript**.
 
-## 🚀 Installation et Configuration
+_Schema de données : schema.json_
 
-### 1️⃣ Prérequis
+## Installation et Configuration
+
+### Prérequis
 - **Node.js** (>= 14.x)
 - **MongoDB** (local ou via MongoDB Atlas)
 
-### 2️⃣ Installation
+### Installation
 Clonez ce dépôt et installez les dépendances :
 ```bash
 git clone https://github.com/RaggedBean/MongoTaskManager.git
@@ -16,29 +18,29 @@ cd MongoTaskManager
 npm install
 ```
 
-### 3️⃣ Configuration
+### Configuration
 Créez un fichier `.env` et ajoutez :
 ```
 MONGO_URI=mongodb://localhost:27017/taches_db
 PORT=3000
 ```
-💡 Remplacez `MONGO_URI` par votre URI MongoDB si vous utilisez un service distant.
+Remplacez `MONGO_URI` par votre URI MongoDB si vous utilisez un service distant.
 
-### 4️⃣ Lancer le Serveur
+### Lancer le Serveur
 ```bash
 npm start
 ```
 Le serveur démarre sur **http://localhost:3000**.
 
-## 📌 API REST
+## API REST
 L'application expose une API REST pour gérer les tâches.
 
-### 📍 Routes disponibles
-#### 1️⃣ **Récupérer toutes les tâches**
+### Routes disponibles
+#### **Récupérer toutes les tâches**
 ```http
 GET /tasks
 ```
-✅ **Réponse :**
+**Réponse :**
 ```json
 [
   {
@@ -56,11 +58,11 @@ GET /tasks
 ]
 ```
 
-#### 2️⃣ **Récupérer une tâche par ID**
+#### **Récupérer une tâche par ID**
 ```http
 GET /tasks/:id
 ```
-✅ **Réponse :**
+**Réponse :**
 ```json
 {
   "_id": "65f4d0e12345",
@@ -69,11 +71,11 @@ GET /tasks/:id
 }
 ```
 
-#### 3️⃣ **Créer une tâche**
+#### **Créer une tâche**
 ```http
 POST /tasks
 ```
-📥 **Corps JSON :**
+**Corps JSON :**
 ```json
 {
   "titre": "Nouveau titre",
@@ -86,28 +88,28 @@ POST /tasks
   "sousTaches": []
 }
 ```
-✅ **Réponse :** `201 Created`
+**Réponse :** `201 Created`
 
-#### 4️⃣ **Modifier une tâche**
+#### **Modifier une tâche**
 ```http
 PUT /tasks/:id
 ```
-📥 **Corps JSON :** (champs modifiés)
+**Corps JSON :** (champs modifiés)
 ```json
 {
   "statut": "en cours",
   "priorite": "haute"
 }
 ```
-✅ **Réponse :** `200 OK`
+**Réponse :** `200 OK`
 
-#### 5️⃣ **Supprimer une tâche**
+#### **Supprimer une tâche**
 ```http
 DELETE /tasks/:id
 ```
-✅ **Réponse :** `204 No Content`
+**Réponse :** `204 No Content`
 
-## 🖥️ Mode d’Emploi
+## Mode d’Emploi
 ### Accès à l’interface web
 - Ouvrez **index.html** dans un navigateur
 - Permet de **créer, modifier et supprimer** des tâches
